@@ -1,0 +1,12 @@
+# Ignore Windows junk
+Thumbs.db
+Desktop.ini
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore Browser/Selenium Cache folders completely
+*Cache*
+cache/
+.pytest_cache/
