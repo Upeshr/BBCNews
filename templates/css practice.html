@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>My Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css practice.css') }}">
+</head>
+
+<body>
+<h1>My Todo App</h1>
+<form method="POST">
+    <input name="task" placeholder="Enter task">
+    <button>Add Task</button>
+</form>
+<ul>
+    {% for i, t in tasks %}
+    <li>
+        <span>{{ t }}</span>
+        <div>
+            <a href="/task/{{ i }}">View</a>
+            <a href="/delete/{{ i }}">Delete</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

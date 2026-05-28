@@ -1,0 +1,45 @@
+from seleniumbase import SB
+import random
+import sys
+
+def scrape_amazon_product(url: str) -> None:
+    with SB(uc=True, test=True, agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36") as sb:
+        try:
+            print(f"Opening: {url}")
+            sb.open(url)
+            sb.sleep(random.uniform(3, 5))
+
+            # Handle checkbox CAPTCHA automatically
+            try:
+                sb.uc_gui_click_captcha()
+                print("CAPTCHA clicked!")
+                sb.sleep(random.uniform(2, 4))
+            except Exception:
+                print("No checkbox CAPTCHA detected, continuing...")
+
+            # If image CAPTCHA, give manual solve time
+            if "captcha" in sb.get_current_url().lower() or "captcha" in sb.get_page_source().lower():
+                print("Image CAPTCHA detected! You have 30 seconds to solve it...")
+                sb.sleep(30)
+
+            sb.wait_for_element_visible("#productTitle", timeout=15)
+
+            title = sb.get_text("#productTitle").strip()
+
+            try:
+                price = sb.get_text(".a-price[data-a-color='price'] .a-offscreen").strip()
+            except Exception:
+                price = "N/A"
+
+            print(f"\nPRODUCT: {title}\nPRICE:   {price}")
+
+            with open("amazon_results.txt", "a", encoding="utf-8") as f:
+                f.write(f"{title} | {price}\n")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            sb.save_screenshot("error_screenshot.png")
+
+if __name__ == "__main__":
+    target_url = sys.argv[1] if len(sys.argv) > 1 else "https://www.daraz.com.np/#?"
+    scrape_amazon_product(target_url)

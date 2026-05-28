@@ -1,0 +1,41 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+import time
+import random
+
+options = Options()
+options.add_experimental_option("detach", True)  #Keep browser open
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option("useAutomationExtension", False)
+options.add_argument("--disable-blink-features=AutomationControlled")  # Run in headless mode for testing
+
+
+driver = webdriver.Chrome(options=options)
+
+time.sleep(random.uniform(3, 5))
+
+driver.get("https://www.google.com")
+time.sleep(random.uniform(3, 5))
+
+
+search_box = driver.find_element(by=By.NAME, value="q")
+time.sleep(random.uniform(2, 4))
+
+words = "theagleye"
+
+for i in words:
+    search_box.send_keys(i)
+    time.sleep(random.uniform(0.2, 0.5))
+
+ 
+time.sleep(random.uniform(2, 4))
+
+search_box.send_keys(Keys.ENTER)
+
+
+input("Press any key to quit...")
+driver.quit()

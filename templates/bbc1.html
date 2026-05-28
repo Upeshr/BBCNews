@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BBC News</title>
+</head>
+<body>
+    <h1>BBC News Search</h1>
+    
+    <form method="GET">
+        <input type="text" name="q" placeholder="Search News" value="{{ request.args.get('q', '') }}">
+        <button type="submit">Search</button>
+        {% if request.args.get('q') %}
+            <a href="/">Clear</a>
+        {% endif %}
+    </form>
+    
+    <hr>
+
+    {# Change item.title to item[1] and item.link to item[2] #}
+    {% for item in news %}
+        <h3>{{ item[1] }}</h3>
+        <a href="{{ item[2] }}" target="_blank">
+            Read full article
+        </a>
+        <hr>
+    {% else %}
+        <p>No news articles found in the database. Try refreshing.</p>
+    {% endfor %}
+
+</body>
+</html>

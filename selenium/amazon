@@ -1,0 +1,71 @@
+import undetected_chromedriver as uc
+from selenium.webdriver.common.by import By
+import time
+import random
+import csv # Added for your portfolio
+
+def scrape_amazon_product(url):
+    # 1. Setup Options properly
+    options = uc.ChromeOptions()
+    options.add_argument("--window-size=1920,1080")
+    # This helps hide the "Automation" signature
+    options.add_argument("--disable-blink-features=AutomationControlled") 
+
+    # 2. Initialize the Driver
+    driver = uc.Chrome(options=options)
+
+    try:
+        # Start at Google to build a "History"
+        driver.get("https://www.google.com")
+        time.sleep(random.uniform(1, 2))
+        
+        print(f"Navigating to Amazon...")
+        driver.get(url)
+        
+        # Give Amazon time to load and you time to solve CAPTCHA if needed
+        time.sleep(random.uniform(5, 8)) 
+        
+        # Scroll like a human
+        driver.execute_script("window.scrollTo(0, 500);")
+        time.sleep(random.uniform(2, 4))
+
+        # 3. Extract Data using safe 'try/except' for each element
+        try:
+            title = driver.find_element(By.ID, "productTitle").text.strip()
+            
+            # Use a slightly more robust price selector
+            price_whole = driver.find_element(By.CLASS_NAME, "a-price-whole").text
+            price_fraction = driver.find_element(By.CLASS_NAME, "a-price-fraction").text
+            full_price = f"{price_whole}.{price_fraction}"
+            
+            print(f"Success: {title} - ${full_price}")
+
+            # 4. SAVE TO CSV (The "Fiverr" Touch)
+            with open('amazon_data.csv', 'a', newline='', encoding='utf-8') as file:
+                writer = csv.writer(file)
+                # If file is empty, you'd usually write a header first
+                writer.writerow([title, full_price, url])
+                print("Data saved to amazon_data.csv")
+
+        except Exception as e:
+            print(f"Could not find elements. Amazon might have blocked you or changed layout: {e}")
+
+    except Exception as e:
+        print(f"Critical Error: {e}")
+        time.sleep(20) # Time to manually see what went wrong
+
+    finally:
+        try:
+            # Tell the driver to quit, but be ready for the 'Invalid Handle' error
+            driver.quit()
+        except OSError as e:
+            # If it's the [WinError 6] handle error, just ignore it and move on
+            if getattr(e, 'winerror', None) == 6:
+                pass
+            else:
+                raise e
+
+# You can now loop through a list of URLs!
+urls = ["https://www.amazon.com/dp/B09B2SB98X"]
+for link in urls:
+    scrape_amazon_product(link)

@@ -1,0 +1,87 @@
+/* todo.css */
+
+body {
+  background-color: #9bc6ee;
+  color: #231010;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+.container {
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 48px;
+}
+
+h1 {
+  font-size: 32px;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+input[name="task"] {
+  flex: 1;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #312357;
+  background-color: #f0cac1;
+  font-size: 16px;
+  outline: none;
+}
+
+input[name="task"]:focus {
+  border-color: #45287b;
+}
+
+button {
+  padding: 9px 18px;
+  background-color: #45287b;
+  color: #c3b7b7;
+  border: none;
+  border-radius: 17px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  opacity: 0.88;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 11px;
+  padding: 6px;
+  border: 1px solid #bbb;
+}
+
+li .actions { display: flex; gap: 6px; }
+
+li .actions a {
+  text-decoration: none;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+a[href*="task"]   { background: #E6F1FB; color: #0C447C; }
+a[href*="delete"] { background: #FCEBEB; color: #A32D2D; }
+

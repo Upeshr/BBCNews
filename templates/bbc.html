@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BBC News</title>
+    </head>
+<body>
+    <h1>BBC News Search</h1>
+    <form method="GET">
+        <input
+            type="text",
+            name="q",
+            placeholder="Search News">
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+    <hr>
+
+    {% for item in news %}
+        <h3>{{ item.title }}</h3>
+        <a href="{{ item.link }}">
+            {{ item.link }}
+        </a>
+    <hr>
+    {% endfor %}
+
+</body>
+</html>

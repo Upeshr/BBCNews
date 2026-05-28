@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='todo.css') }}">
+</head>
+
+<body>
+<h2>My Todo App</h2>
+<form method="POST">
+    <input name="task" placeholder="Enter task">
+    <button>Add Task</button>
+</form>
+<ul>
+    {% for id, text, done in tasks %}
+    <li>
+        <spanstyle="text-decoration: {% if done %}line-throgh{% else %}none{% endif %};">
+        
+            {{ text }}
+        </span>
+
+        <div>
+            <a href="/toggle/{{ id }}">
+                {% if done %}undo{% else %}Done{% endif %}
+            </a>
+
+            <a href="/delete/{{ id }}">Delete</a>
+            <a href="/edit/{{ id }}">Edit</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

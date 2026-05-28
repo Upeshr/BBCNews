@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Scraper App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Web Scraper</h1>
+        <p>Enter any website URL to scrape its data"</p>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST" action="/scrape">
+            <input type="text" name="url" placeholder="https://example.com" required>
+            <button type="submit">Scrape Website</button>
+        </form>
+    </div>
+</body>
+</html>

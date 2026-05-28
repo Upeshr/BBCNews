@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    padding: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+}
+
+h1{color: #0070C0;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 12px 24px;
+    background: #0070C0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #005a9e;
+}
+
+.error {
+    background: #ffe0e0;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.results {
+    margin-top: 20px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    color: #0070C0;
+    margin-bottom: 10px;
+    margin-bottom: 20px solid #f0f2f5;
+    padding-bottom: 5px;
+}
+
+.section ul li {
+    padding: 8px;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.download-btn {
+    background: #00a550;
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 16px;
+}
+
+.download-btn:hover {
+    background: #008a42;
+}
+
+.back-btn {
+    text-decoration: underline;
+}
+
+.url-text {
+    color: #666;
+    margin-bottom: 10px;
+    word-break: break-all;
+}
